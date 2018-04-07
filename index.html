@@ -1,0 +1,54 @@
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+    <title>Title</title>
+
+<script type="text/javascript" src = "GLEAT/js/gl-matrix-min.js"></script>
+<script type="text/javascript" src="GLEAT/js/webgl-utils.js"></script>
+<script type="text/javascript" src="GLEAT/js/webgl-debug.js"></script>
+<script type="text/javascript" src="GLEAT/js/numeric-1.2.6.min.js"></script>
+<script type="text/javascript" src="GLEAT/js/jquery-1.11.1.min.js"></script>
+
+<!--Our Scripts!-->
+<script type="text/javascript" src="GLEAT/Geometry/PolyMesh.js"></script>
+<script type="text/javascript" src="GLEAT/Geometry/Primitives3D.js"></script>
+<script type="text/javascript" src="GLEAT/Geometry/Cameras3D.js"></script>
+<script type="text/javascript" src="GLEAT/Viewers/Shaders.js"></script>
+<script type="text/javascript" src="GLEAT/Viewers/SimpleMeshCanvas.js"></script>
+<script type="text/javascript" src="EulerAngles.js"></script>
+    <script type="text/javascript" src="init.js"></script>
+</head>
+
+<body>
+
+<table><tr><td>
+<table border = "1" cellpadding = "5">
+<tr><td colspan = "4">
+<canvas id="MainGLCanvas" style="border: none;" width="900" height="600"></canvas>
+</td></tr>
+<tr><td bgcolor = "black"><font color = "#00FF00"><b>Yaw</b></font></td>
+<td>
+<input type="range" id="yawSlider" min = "0" max = "1000" value = "0" step = "1" style="width:450px">
+</td><td><input type="text" id="yawTxt" size="1"></input></td><td><button type="button" id = "yawButton" onclick="callYawSet()">SET</button></td></tr>
+
+<tr><td bgcolor = "black"><font color = "cyan"><b>Pitch</b></font></td>
+<td>
+<input type="range" id="pitchSlider" min = "0" max = "1000" value = "0" step = "1" style="width:450px">
+</td><td><input type="text" id="pitchTxt" size="1"></input></td><td><button type="button" id = "pitchButton" onclick="callPitchSet()">SET</button></td></tr>
+
+
+<tr><td bgcolor = "black"><font color = "red"><b>Roll</b></font></td>
+<td>
+<input type="range" id="rollSlider" min = "0" max = "1000" value = "0" step = "1" style="width:450px">
+</td><td><input type="text" id="rollTxt" size="1"></input></td><td><button type="button" id = "rollButton" onclick="callRollSet()">SET</button></td></tr>
+</table>
+
+</td>
+
+</table>
+
+
+
+</body>
+</html>
