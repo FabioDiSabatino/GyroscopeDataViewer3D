@@ -26,7 +26,9 @@ function SimpleMeshCanvas(glcanvas, shadersRelPath) {
 		mat4.perspective(pMatrix, 45, glcanvas.gl.viewportWidth / glcanvas.gl.viewportHeight, glcanvas.camera.R/100.0, glcanvas.camera.R*2);
 		var mvMatrix = glcanvas.camera.getMVMatrix();	
 		glcanvas.mesh.render(glcanvas.gl, colorShader, pMatrix, mvMatrix, glcanvas.ambientColor, glcanvas.light1Pos, glcanvas.light2Pos, glcanvas.lightColor);
-	}
+
+
+    }
 	
 	/////////////////////////////////////////////////////
 	//Step 2: Setup mouse callbacks

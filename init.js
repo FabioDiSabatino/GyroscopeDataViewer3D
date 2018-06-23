@@ -7,6 +7,7 @@
     var animating = false;
     var startTime = 0;
     var totalTime = 0;
+    counter=0;
 
     function doInterpAnimationStep() {
         var currTime = (new Date()).getTime();
@@ -29,17 +30,20 @@
         rollTxt.value = "" + (glcanvas.rollAngle*180.0/Math.PI).toFixed(1);
         rollSlider.value = glcanvas.rollAngle * 1000.0/(2*Math.PI);
 
+        requestAnimFrame(doInterpAnimationStep);
+
         glcanvas.repaint();
 
-        requestAnimFrame(doInterpAnimationStep);
+
     }
 
     document.addEventListener("DOMContentLoaded", function(event) {
         console.log("debug");
         $('body').on('contextmenu', '#MainGLCanvas', function(e){ return false; }); //Need this to disable the menu that pops up on right clicking
         glcanvas = document.getElementById("MainGLCanvas");
+
         GimbalCanvas(glcanvas);//Add fields to glcanvas that help with rendering
-        glcanvas.mesh.loadFile("Airbusa380.off");
+        glcanvas.mesh.loadFile("FinalBaseMesh.obj");
         glcanvas.initGimbals();
 
 
@@ -60,7 +64,7 @@
         });
         function callYawSet() {
             glcanvas.yawAngle = Math.PI*parseFloat(yawTxt.value)/180.0;
-            yawSlider.value = glcanvas.yawAngle*1000/(2*Math.PI);
+            yawSlider.value = glcanvas.yawAngle*1000/(Math.PI);
             requestAnimFrame(glcanvas.repaint);
         }
 
@@ -120,32 +124,63 @@
 
     });
 
+
+
     var ws = new WebSocket('ws://localhost:3000');
     // event emmited when connected
     ws.onopen = function () {
-        console.log('websocket is connected ...')
+        console.log('client is connected ...')
         // sending a send event to websocket server
         ws.send('connected')
     };
     // event emmited when receiving message
     ws.onmessage = function (ev) {
 
+
         var data=ev.data;
-        data=data.split('|');
+        var rotation=data.split('|');
+
+        rotation=rotation[2].split(';');
+
+        yaw=rotation[0];
+
+        if (Math.abs(yaw - yaw1) > 0) {
+            mesh.rotation.y=(yaw) * Math.PI / 180;
+            yaw1=yaw;
+        }
+
+
+        for(var i=11;i<12;i++){
+            mesh.skeleton.bones[i].rotation.set(0,90,0);
+        }
+
+
+        console.log(yaw);
 
 
 
+         /*   if (Math.abs(rotation[0] - yaw1) > 0|| Math.abs(rotation[1] - pitch1) > 0 || Math.abs(rotation[2] - roll1) > 0 ) {
+                y1 = parseFloat(yaw1) * Math.PI / 180;
+                p1 = parseFloat(pitch1) * Math.PI / 180;
+                r1 = parseFloat(roll1) * Math.PI / 180;
+                y2 = parseFloat(rotation[0]) * Math.PI / 180;
+                p2 = parseFloat(rotation[1]) * Math.PI / 180;
+                r2 = parseFloat(rotation[2]) * Math.PI / 180;
+                totalTime = (Math.abs(y1 - y2) + Math.abs(p1 - p2) + Math.abs(r1 - r2)) / (Math.PI); //1 Second for each 180 degree change
+                animating = true;
+                startTime = (new Date()).getTime();
+                requestAnimFrame(doInterpAnimationStep);
 
-            y1 = parseFloat(yaw1)*Math.PI/180;
-            p1 = parseFloat(pitch1)*Math.PI/180;
-            r1 = parseFloat(roll1)*Math.PI/180;
-            y2 = parseFloat(data[0])*Math.PI/180;
-            p2 = parseFloat(data[1])*Math.PI/180;
-            r2 = parseFloat(data[2])*Math.PI/180;
-            totalTime = (Math.abs(y1-y2) + Math.abs(p1-p2) + Math.abs(r1-r2))/(Math.PI); //1 Second for each 180 degree change
-            animating = true;
-            startTime = (new Date()).getTime();
-            requestAnimFrame(doInterpAnimationStep);
+                yaw1 = rotation[0];
+                pitch1 = rotation[1];
+                roll1 = rotation[2];
+
+                console.log( rotation[2]);
+                counter++;
+
+            }*/
+
+
 
     }
 

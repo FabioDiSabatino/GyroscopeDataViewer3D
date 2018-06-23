@@ -14,7 +14,7 @@ var expressWs = require('express-ws')(app);
 app.get('/', function(req, res) {
     res.setHeader("Content-Type", ''); //Solution!
     app.use(express.static(__dirname ));
-    res.sendFile(path.join(__dirname + '/index.html'));
+    res.sendFile(path.join(__dirname + '/three.js/examples/webgl_animation_skinning_blending.html'));
     console.log(__dirname + 'index.html');
 });
 
@@ -55,7 +55,8 @@ function onOpen(){
 function onData(data){
     console.log('data received..');
     if (connectioWS!=null){
-        connectioWS.send(data.toString())
+        connectioWS.send(data.toString());
+
     }else{
         console.log("no ws connection...")
     }

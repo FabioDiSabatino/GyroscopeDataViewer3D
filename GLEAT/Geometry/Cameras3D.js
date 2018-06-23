@@ -30,7 +30,7 @@ function MousePolarCamera(pixWidth, pixHeight, yfov) {
 		this.up[0] = -cosP*cosT;
 		this.up[1] = sinP;
 		this.up[2] = cosP*sinT;
-		vec3.scaleAndAdd(this.eye, this.center, this.towards, this.R);	
+		vec3.scaleAndAdd(this.eye, this.center, this.towards, this.R);
 	}
 	
 	this.centerOnBBox = function(bbox, theta, phi) {

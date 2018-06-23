@@ -39,6 +39,8 @@ function GimbalCanvas(glcanvas) {
         var R = bbox.getDiagLength();
         var H = R/20.0;
         
+        prov = makeCylinderMesh([0, 3, 1], center, R,-R/30 ,H, vec3.fromValues(0, 1, 1));
+
         this.yawgimbal = makeCylinderMesh([0, 1, 2], center, R, H, vec3.fromValues(0, 1, 0));
         this.yawConnection = makeCylinderMesh([0, 2, 1], vec3.fromValues(center[0], center[1]-R*(1+1/10.0), center[2]), H/3, R/5.0, vec3.fromValues(0.5, 0.5, 0.5));
         
@@ -53,7 +55,8 @@ function GimbalCanvas(glcanvas) {
         this.yawAngle = 0.0;
         this.pitchAngle = 0.0;
         this.rollAngle = 0.0;
-        this.camera.centerOnMesh(this.yawgimbal);
+
+        this.camera.centerOnMesh(this.pitchgimbal);
     }
 
 	glcanvas.colorBlack = vec3.fromValues(0.0, 0.0, 0.0);
@@ -63,42 +66,41 @@ function GimbalCanvas(glcanvas) {
 	glcanvas.repaint = function() {
 		glcanvas.gl.viewport(0, 0, glcanvas.gl.viewportWidth, glcanvas.gl.viewportHeight);
 		glcanvas.gl.clear(glcanvas.gl.COLOR_BUFFER_BIT | glcanvas.gl.DEPTH_BUFFER_BIT);
-		
+
 		var pMatrix = mat4.create();
 		mat4.perspective(pMatrix, 45, glcanvas.gl.viewportWidth / glcanvas.gl.viewportHeight, glcanvas.camera.R/100.0, glcanvas.camera.R*2);
 		var mvMatrix = glcanvas.camera.getMVMatrix();
 		if (glcanvas.displayGimbals) {
-		    glcanvas.yawConnection.render(glcanvas.gl, colorShader, pMatrix, mvMatrix, glcanvas.colorWhite, glcanvas.light1Pos, glcanvas.light2Pos, glcanvas.ambientColor);	
+		    glcanvas.yawConnection.render(glcanvas.gl, colorShader, pMatrix, mvMatrix, glcanvas.colorWhite, glcanvas.light1Pos, glcanvas.light2Pos, glcanvas.ambientColor);
 	    }
-            
+
         var rotYaw = mat4.create();
         mat4.identity(rotYaw);
-        mat4.rotateY(rotYaw, rotYaw, -glcanvas.yawAngle);
+        mat4.rotateY(rotYaw, rotYaw, glcanvas.yawAngle);
         mat4.multiply(mvMatrix, mvMatrix, rotYaw);
         if (glcanvas.displayGimbals) {
 		    glcanvas.yawgimbal.render(glcanvas.gl, colorShader, pMatrix, mvMatrix, glcanvas.colorWhite, glcanvas.light1Pos, glcanvas.light2Pos, glcanvas.ambientColor);
-		    glcanvas.pitchConnection.render(glcanvas.gl, colorShader, pMatrix, mvMatrix, glcanvas.colorWhite, glcanvas.light1Pos, glcanvas.light2Pos, glcanvas.ambientColor);	
+		    glcanvas.pitchConnection.render(glcanvas.gl, colorShader, pMatrix, mvMatrix, glcanvas.colorWhite, glcanvas.light1Pos, glcanvas.light2Pos, glcanvas.ambientColor);
 	    }
-		
+
         var rotPitch = mat4.create();
         mat4.identity(rotPitch);
-        mat4.rotateX(rotPitch, rotPitch, -glcanvas.pitchAngle);
+        mat4.rotateX(rotPitch, rotPitch, glcanvas.pitchAngle);
         mat4.multiply(mvMatrix, mvMatrix, rotPitch);
         if (glcanvas.displayGimbals) {
 		    glcanvas.pitchgimbal.render(glcanvas.gl, colorShader, pMatrix, mvMatrix, glcanvas.colorWhite, glcanvas.light1Pos, glcanvas.light2Pos, glcanvas.ambientColor);
-		    glcanvas.rollConnection.render(glcanvas.gl, colorShader, pMatrix, mvMatrix, glcanvas.colorWhite, glcanvas.light1Pos, glcanvas.light2Pos, glcanvas.ambientColor);	
+		    glcanvas.rollConnection.render(glcanvas.gl, colorShader, pMatrix, mvMatrix, glcanvas.colorWhite, glcanvas.light1Pos, glcanvas.light2Pos, glcanvas.ambientColor);
 	    }
 
 		var rotRoll = mat4.create();
 		mat4.identity(rotRoll);
-		mat4.rotateZ(rotRoll, rotRoll, -glcanvas.rollAngle);
+		mat4.rotateZ(rotRoll, rotRoll, glcanvas.rollAngle);
 		mat4.multiply(mvMatrix, mvMatrix, rotRoll);
 		if (glcanvas.displayGimbals) {
 		    glcanvas.rollgimbal.render(glcanvas.gl, colorShader, pMatrix, mvMatrix, glcanvas.colorWhite, glcanvas.light1Pos, glcanvas.light2Pos, glcanvas.ambientColor);
 		    glcanvas.meshConnection.render(glcanvas.gl, colorShader, pMatrix, mvMatrix, glcanvas.colorWhite, glcanvas.light1Pos, glcanvas.light2Pos, glcanvas.ambientColor);
 		}
 		glcanvas.mesh.render(glcanvas.gl, colorShader, pMatrix, mvMatrix, glcanvas.ambientColor, glcanvas.light1Pos, glcanvas.light2Pos, glcanvas.lightColor);
-		
 	}
 	
 }
