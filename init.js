@@ -485,16 +485,18 @@
             var data=ev.data;
             var rotation=data.split('|');
 
+            console.log(rotation[1]);
+
             rotation=rotation[2].split(';');
 
             yaw=rotation[0];
             pitch=rotation[1];
             roll=rotation[2];
-            console.log(rotation);
+            console.log(yaw);
 
 
             /----------------------------------------Pitch interpretation---------------------------------------------/
-        /*    if (Math.abs(pitch - pitch1) > 1){
+           if (Math.abs(pitch - pitch1) > 1){
 
                 if (pitch>5 && pitch<20 ){
 
@@ -536,12 +538,12 @@
 
                 pitch1=pitch;
 
-            }*/
+            }
 
 
             if (Math.abs(yaw - yaw1) > 0) {
                 mesh.rotation.y=(-yaw) * Math.PI / 180;
-                roll1=roll;
+                yaw1=yaw;
 
             }
 

@@ -4,9 +4,6 @@
     <list default="true" id="f172b9f9-3d6f-4b10-a9fc-36dd427d0303" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/init.js" beforeDir="false" afterPath="$PROJECT_DIR$/init.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prova.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/three.js/examples/webgl_animation_skinning_blending.html" beforeDir="false" afterPath="$PROJECT_DIR$/three.js/examples/webgl_animation_skinning_blending.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/walking.html" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -38,11 +35,8 @@
       <file leaf-file-name="init.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/init.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="309">
-              <caret line="494" selection-start-line="494" selection-end-line="494" />
-              <folding>
-                <element signature="e#12385#13723#0" />
-              </folding>
+            <state relative-caret-position="255">
+              <caret line="487" column="37" lean-forward="true" selection-start-line="487" selection-start-column="37" selection-end-line="487" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -231,11 +225,12 @@
       <workItem from="1529851381599" duration="1452000" />
       <workItem from="1529868196892" duration="2985000" />
       <workItem from="1529871370303" duration="618000" />
+      <workItem from="1529908986549" duration="3663000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="126046000" />
+    <option name="totallyTimeSpent" value="129709000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -670,11 +665,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/init.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="494" selection-start-line="494" selection-end-line="494" />
-          <folding>
-            <element signature="e#12385#13723#0" />
-          </folding>
+        <state relative-caret-position="255">
+          <caret line="487" column="37" lean-forward="true" selection-start-line="487" selection-start-column="37" selection-end-line="487" selection-end-column="37" />
         </state>
       </provider>
     </entry>
